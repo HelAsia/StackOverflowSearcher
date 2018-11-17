@@ -22,10 +22,10 @@ public class QueryResult {
   private Integer errorId;
   @SerializedName("error_message")
   @Expose
-  private Integer errorMessage;
+  private String errorMessage;
   @SerializedName("error_name")
   @Expose
-  private Integer errorName;
+  private String errorName;
 
   public QueryResult(){
 
@@ -39,7 +39,7 @@ public class QueryResult {
     this.quotaRemaining = quotaRemaining;
   }
 
-  public QueryResult(Integer errorId, Integer errorMessage, Integer errorName) {
+  public QueryResult(Integer errorId, String errorMessage, String errorName) {
     this.errorId = errorId;
     this.errorMessage = errorMessage;
     this.errorName = errorName;
@@ -85,19 +85,19 @@ public class QueryResult {
     this.errorId = errorId;
   }
 
-  public Integer getErrorMessage() {
+  public String getErrorMessage() {
     return errorMessage;
   }
 
-  public void setErrorMessage(Integer errorMessage) {
+  public void setErrorMessage(String errorMessage) {
     this.errorMessage = errorMessage;
   }
 
-  public Integer getErrorName() {
+  public String getErrorName() {
     return errorName;
   }
 
-  public void setErrorName(Integer errorName) {
+  public void setErrorName(String errorName) {
     this.errorName = errorName;
   }
 

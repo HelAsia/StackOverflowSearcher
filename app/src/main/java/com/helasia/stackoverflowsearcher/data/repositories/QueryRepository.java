@@ -9,11 +9,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class QueryRepositiory implements QueryRepositoryInterface {
+public class QueryRepository implements QueryRepositoryInterface {
   private Retrofit retrofit;
   private SearchAPI searchAPI;
 
-  public QueryRepositiory() {
+  public QueryRepository() {
     this.retrofit = RetrofitSingleton.getRetrofitInstance();
     this.searchAPI = retrofit.create(SearchAPI.class);
   }
@@ -24,19 +24,19 @@ public class QueryRepositiory implements QueryRepositoryInterface {
       @Override
       public void onResponse(Call<QueryResult> call, Response<QueryResult> response) {
         QueryResult queryResult = response.body();
-        if(queryResult.getErrorId() != null){
+        if(queryResult.getErrorId() == null){
           Log.i("onResponse(): ", queryResult.toString());
-          listener.onSuccess();
+          listener.onSuccess(queryResult.getItems());
         }else {
-          Log.i("onResponse(): ", queryResult.toString());
-          listener.onError();
+          Log.i("onResponse(). error: ", queryResult.toString());
+          listener.onError(queryResult.getErrorMessage());
         }
       }
 
       @Override
       public void onFailure(Call<QueryResult> call, Throwable t) {
-        Log.i("onFailure(): Server: ", t.getMessage());
-        listener.onSuccess();
+        Log.i("onFailure(): Server ", t.getMessage());
+        listener.onError(t.getMessage());
       }
     });
   }

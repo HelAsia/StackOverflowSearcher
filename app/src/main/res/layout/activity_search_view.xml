@@ -20,14 +20,22 @@
     android:background="@color/primary">
   </android.support.v7.widget.Toolbar>
 
+  <TextView
+    android:id="@+id/errorMessage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/toolbar_activity_search_view"
+    android:textColor="@android:color/holo_red_dark"
+    android:visibility="gone"/>
+
   <ScrollView
     android:id="@+id/scrollViewLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/toolbar_activity_search_view">
+    android:layout_below="@id/errorMessage">
 
     <android.support.v7.widget.RecyclerView
-      android:id="@+id/addCategoryNamesRecyclerView"
+      android:id="@+id/itemsRecyclerView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:scrollbars="vertical"/>
