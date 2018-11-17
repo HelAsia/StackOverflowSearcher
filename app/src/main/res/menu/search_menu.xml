@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:context=".search_with_results.SearchActivityView">
+
+  <group android:checkableBehavior="single">
+    <item
+      android:id="@+id/action_search"
+      android:icon="@drawable/ic_search"
+      android:title="@string/search_title"
+      app:actionViewClass="android.support.v7.widget.SearchView"
+      app:showAsAction="ifRoom"/>
+    <item
+      android:id="@+id/action_refresh"
+      android:icon="@drawable/ic_refresh"
+      android:title="@string/refresh_title"
+      app:showAsAction="ifRoom"/>
+  </group>
+
+</menu>

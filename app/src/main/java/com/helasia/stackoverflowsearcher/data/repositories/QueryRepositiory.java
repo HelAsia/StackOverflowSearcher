@@ -25,18 +25,17 @@ public class QueryRepositiory implements QueryRepositoryInterface {
       public void onResponse(Call<QueryResult> call, Response<QueryResult> response) {
         QueryResult queryResult = response.body();
         if(queryResult.getErrorId() != null){
-          Log.i("getQueryResult.onResponse(): QueryResult: ", queryResult.toString());
+          Log.i("onResponse(): ", queryResult.toString());
           listener.onSuccess();
         }else {
-          Log.i("getQueryResult.onResponse(): QueryResult: ", queryResult.toString());
+          Log.i("onResponse(): ", queryResult.toString());
           listener.onError();
         }
-
       }
 
       @Override
       public void onFailure(Call<QueryResult> call, Throwable t) {
-        Log.i("getQueryResult.onFailure(): Serwer: ", t.getMessage());
+        Log.i("onFailure(): Server: ", t.getMessage());
         listener.onSuccess();
       }
     });
