@@ -13,14 +13,6 @@
   tools:context=".welcome.WelcomeActivityView"
   android:background="@color/primary_light">
 
-  <TextView
-    android:id="@+id/errorTextView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:visibility="gone"/>
-
   <LinearLayout
     android:id="@+id/logo_layout"
     android:gravity="center"
