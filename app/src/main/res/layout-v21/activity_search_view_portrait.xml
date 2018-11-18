@@ -16,12 +16,13 @@
     android:minHeight="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:elevation="2dp"
     app:titleTextColor="@android:color/black"
     android:background="@color/primary">
   </android.support.v7.widget.Toolbar>
 
   <TextView
-    android:id="@+id/errorMessage"
+    android:id="@+id/error_message"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/toolbar_activity_search_view"
@@ -32,10 +33,10 @@
     android:id="@+id/scrollViewLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/errorMessage">
+    android:layout_below="@id/error_message">
 
     <android.support.v7.widget.RecyclerView
-      android:id="@+id/itemsRecyclerView"
+      android:id="@+id/items_recycler_view"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:scrollbars="vertical"/>

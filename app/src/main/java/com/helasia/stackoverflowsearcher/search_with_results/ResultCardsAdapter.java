@@ -36,7 +36,7 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
     void shareCardClicked(String url);
   }
 
-  ResultCardsAdapter(Context context, List<Item> itemList){
+  public ResultCardsAdapter(Context context, List<Item> itemList){
     this.context = context;
     this.itemList = itemList;
     setHasStableIds(true);

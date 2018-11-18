@@ -54,4 +54,7 @@
 
   <string name="title_with_font">stack<b>overflow</b>searcher</string>
 
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

@@ -22,7 +22,10 @@ public class WebViewActivity extends AppCompatActivity {
     context = getApplicationContext();
 
     setToolbar();
+    setWebView();
+  }
 
+  public void setWebView(){
     Intent i = getIntent();
     String url= i.getStringExtra("url");
     WebView webView = (WebView) findViewById(R.id.web_view);

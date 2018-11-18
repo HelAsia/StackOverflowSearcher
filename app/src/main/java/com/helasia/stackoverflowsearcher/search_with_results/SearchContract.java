@@ -13,9 +13,14 @@ public interface SearchContract {
     RecyclerView getRecyclerView();
     TextView getErrorMessageTextView();
     void goToDetails(String url);
+    void goToFragment(String url);
+    void setFirstFragment();
+    void setPortraitScreen();
+    void setLandscapeScreen();
   }
 
   interface Presenter{
+    void setFirstScreen();
     void getItemsFromServer(String title);
     String getLastQueryFromPreferences();
     void setRecyclerView(List<Item> itemList);

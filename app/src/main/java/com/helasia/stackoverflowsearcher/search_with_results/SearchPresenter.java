@@ -1,15 +1,17 @@
 package com.helasia.stackoverflowsearcher.search_with_results;
 
+import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import com.helasia.stackoverflowsearcher.data.model.Item;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
+import com.helasia.stackoverflowsearcher.search_with_results.ResultCardsAdapter.OnShareWebViewDetailsListener;
 import com.helasia.stackoverflowsearcher.utils.Constant;
 import java.util.List;
 
 public class SearchPresenter implements SearchContract.Presenter,
-    ResultCardsAdapter.OnShareWebViewDetailsListener,
+    OnShareWebViewDetailsListener,
     QueryRepository.OnQueryResultDisplayListener{
   private QueryRepository queryRepository;
   private SearchContract.View searchView;
@@ -18,6 +20,14 @@ public class SearchPresenter implements SearchContract.Presenter,
     this.queryRepository = queryRepository;
     this.searchView = searchView;
   }
+
+  @Override
+  public void setFirstScreen(){
+    if(!getLastQueryFromPreferences().equals("")){
+      getItemsFromServer(getLastQueryFromPreferences());
+    }
+  }
+
 
   @Override
   public void setRecyclerView(List<Item> itemList) {
@@ -40,7 +50,11 @@ public class SearchPresenter implements SearchContract.Presenter,
 
   @Override
   public void shareCardClicked(String url) {
-    searchView.goToDetails(url);
+    if(searchView.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+      searchView.goToDetails(url);
+    }else {
+      searchView.goToFragment(url);
+    }
   }
 
   @Override

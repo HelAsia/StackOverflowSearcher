@@ -3,6 +3,7 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:orientation="horizontal"
   android:id="@+id/activity_search_view"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -16,30 +17,44 @@
     android:minHeight="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="2dp"
     app:titleTextColor="@android:color/black"
     android:background="@color/primary">
   </android.support.v7.widget.Toolbar>
 
   <TextView
-    android:id="@+id/errorMessage"
+    android:id="@+id/error_message"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/toolbar_activity_search_view"
     android:textColor="@android:color/holo_red_dark"
     android:visibility="gone"/>
 
-  <ScrollView
-    android:id="@+id/scrollViewLayout"
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/errorMessage">
+    android:orientation="horizontal"
+    android:layout_below="@id/error_message">
 
-    <android.support.v7.widget.RecyclerView
-      android:id="@+id/itemsRecyclerView"
-      android:layout_width="match_parent"
+    <ScrollView
+      android:id="@+id/scroll_view_layout"
+      android:layout_width="200dp"
+      android:layout_height="wrap_content">
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/items_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"/>
+    </ScrollView>
+
+    <FrameLayout
+      android:id="@+id/frame_layout_details"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:scrollbars="vertical"/>
-  </ScrollView>
+      android:layout_weight="3">
+    </FrameLayout>
+  </LinearLayout>
+
+
 
 </RelativeLayout>

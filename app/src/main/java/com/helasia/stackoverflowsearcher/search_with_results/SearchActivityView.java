@@ -3,10 +3,13 @@ package com.helasia.stackoverflowsearcher.search_with_results;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
@@ -15,6 +18,7 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.helasia.stackoverflowsearcher.R;
@@ -24,24 +28,21 @@ import com.helasia.stackoverflowsearcher.licenses.LicensesActivityView;
 import com.helasia.stackoverflowsearcher.utils.Constant;
 
 public class SearchActivityView extends AppCompatActivity implements SearchContract.View {
-  @BindView(R.id.itemsRecyclerView) RecyclerView itemsRecyclerView;
-  @BindView(R.id.errorMessage) TextView errorMessage;
+  @BindView(R.id.items_recycler_view) RecyclerView itemsRecyclerView;
+  @BindView(R.id.error_message) TextView errorMessage;
   private SearchContract.Presenter presenter;
   Context context;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_search_view);
-    ButterKnife.bind(this);
     context = getApplicationContext();
-
-
     presenter = new SearchPresenter(this, new QueryRepository());
-    setToolbar();
 
-    if(!presenter.getLastQueryFromPreferences().equals("")){
-      presenter.getItemsFromServer(presenter.getLastQueryFromPreferences());
+    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+      setPortraitScreen();
+    }else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+      setLandscapeScreen();
     }
   }
 
@@ -78,6 +79,44 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
     intent.putExtra("url", url);
     startActivity(intent);
     onStop();
+  }
+
+  @Override
+  public void goToFragment(String url) {
+    Bundle data = new Bundle();
+    data.putString("url", url);
+    DetailsFragmentView detailsFragmentView = new DetailsFragmentView();
+    detailsFragmentView.setArguments(data);
+    FragmentManager fragmentManager = this.getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    fragmentTransaction.replace(R.id.frame_layout_details, detailsFragmentView);
+    fragmentTransaction.commit();
+  }
+
+  @Override
+  public void setFirstFragment(){
+    DetailsFragmentView detailsFragmentView = new DetailsFragmentView();
+    FragmentManager fragmentManagerDetails = this.getSupportFragmentManager();
+    FragmentTransaction fragmentTransactionDetails = fragmentManagerDetails.beginTransaction();
+    fragmentTransactionDetails.replace(R.id.frame_layout_details, detailsFragmentView);
+    fragmentTransactionDetails.commit();
+  }
+
+  @Override
+  public void setPortraitScreen(){
+    setContentView(R.layout.activity_search_view_portrait);
+    ButterKnife.bind(this);
+    setToolbar();
+    presenter.setFirstScreen();
+  }
+
+  @Override
+  public void setLandscapeScreen(){
+    setContentView(R.layout.activity_search_view_landscape);
+    ButterKnife.bind(this);
+    setToolbar();
+    presenter.setFirstScreen();
+    setFirstFragment();
   }
 
   @Override
