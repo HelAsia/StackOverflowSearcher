@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/my_license_card_view_layout"
+  android:layout_width="match_parent"
+  android:layout_height="100dp"
+  android:layout_margin="10dp"
+  android:layout_marginBottom="20dp"
+  android:background="@color/primary_light"
+  android:clickable="true"
+  android:focusable="true"
+  android:foreground="?android:attr/selectableItemBackground"
+  android:orientation="vertical"
+  card_view:cardBackgroundColor="@color/primary_light"
+  card_view:cardCornerRadius="2dp"
+  card_view:cardElevation="2dp">
+
+  <RelativeLayout
+    android:id="@+id/my_card_view_relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="10dp"
+    android:background="@color/primary_light"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <RelativeLayout
+      android:id="@+id/card_name_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+      <TextView
+        android:id="@+id/licenseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/primary_text"
+        android:textSize="20sp"
+        android:layout_alignParentStart="true"/>
+      <TextView
+        android:id="@+id/licenseAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/primary_text"
+        android:textSize="15sp"
+        android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+      android:id="@+id/dividerAfterTitleAndAuthor"
+      android:layout_below="@+id/card_name_layout"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:orientation="horizontal"
+      android:background="@color/primary_text">
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/licenseDescription"
+      android:layout_below="@+id/dividerAfterTitleAndAuthor"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+
+  </RelativeLayout>
+</android.support.v7.widget.CardView>

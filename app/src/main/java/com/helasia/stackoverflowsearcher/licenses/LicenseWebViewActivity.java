@@ -1,4 +1,4 @@
-package com.helasia.stackoverflowsearcher.details;
+package com.helasia.stackoverflowsearcher.licenses;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,17 +12,20 @@ import android.webkit.WebViewClient;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.search_with_results.SearchActivityView;
 
-public class WebViewActivity extends AppCompatActivity {
+public class LicenseWebViewActivity extends AppCompatActivity {
   private Context context;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState){
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.web_view_activity);
     context = getApplicationContext();
 
     setToolbar();
+    setWebView();
+  }
 
+  public void setWebView(){
     Intent i = getIntent();
     String url= i.getStringExtra("url");
     WebView webView = (WebView) findViewById(R.id.web_view);

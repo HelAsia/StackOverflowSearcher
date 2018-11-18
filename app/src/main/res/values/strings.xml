@@ -7,4 +7,51 @@
   <string name="search_title">Search</string>
   <string name="refresh_title">Search</string>
   <string name="details">Details</string>
+
+  <string name="info_about_licences_list">If You want to know something about license, You have to click on card. </string>
+
+  <string name="licences">Licences</string>
+
+  <string name="license_one_name">Support Library Packages</string>
+  <string name="license_one_author"> </string>
+  <string name="license_one_description">Used to adjust and for better handling of list and grid views. </string>
+  <string name="license_one_url">https://developer.android.com/topic/libraries/support-library/packages</string>
+
+  <string name="license_two_name">Butter Knife</string>
+  <string name="license_two_author">Jake Wharton</string>
+  <string name="license_two_description">Used to find and automatically cast the corresponding view in layout. </string>
+  <string name="license_two_url">http://jakewharton.github.io/butterknife/</string>
+
+  <string name="license_three_name">Picasso</string>
+  <string name="license_three_author">Square</string>
+  <string name="license_three_description">Used to speed up loading of images. </string>
+  <string name="license_three_url">http://square.github.io/picasso/</string>
+
+  <string name="license_four_name">Retrofit</string>
+  <string name="license_four_author">Square</string>
+  <string name="license_four_description">Used to manage connections with server and handle JSON to POJO deserialization with ease. Also retrofit handles Gzip decompression in the fly. </string>
+  <string name="license_four_url">https://square.github.io/retrofit/</string>
+
+  <string name="license_five_name">Okhttp</string>
+  <string name="license_five_author">Square</string>
+  <string name="license_five_description">Used to support all requests and responses. </string>
+  <string name="license_five_url">http://square.github.io/okhttp/</string>
+
+  <string name="license_six_name">Gson</string>
+  <string name="license_six_author">Google Inc.</string>
+  <string name="license_six_description">Used to convert Java Objects into their JSON representation.. </string>
+  <string name="license_six_url">https://github.com/google/gson</string>
+
+  <string name="license_seven_name">Material design icons</string>
+  <string name="license_seven_author">Google Inc.</string>
+  <string name="license_seven_description">Used to download and set icons (e. g. in drawer). </string>
+  <string name="license_seven_url">https://github.com/google/material-design-icons</string>
+
+  <string name="license_eight_name">Stack Overflow Logo</string>
+  <string name="license_eight_author"> </string>
+  <string name="license_eight_description">Used to set logo in application. </string>
+  <string name="license_eight_url">https://stackoverflow.com/</string>
+
+  <string name="title_with_font">stack<b>overflow</b>searcher</string>
+
 </resources>

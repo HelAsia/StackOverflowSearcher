@@ -15,7 +15,6 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/MyAppTheme">
-
     <activity android:name=".welcome.WelcomeActivityView">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -23,11 +22,13 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-
     <activity android:name=".search_with_results.SearchActivityView">
     </activity>
-
     <activity android:name=".details.WebViewActivity">
+    </activity>
+    <activity android:name=".licenses.LicensesActivityView">
+    </activity>
+    <activity android:name=".licenses.LicenseWebViewActivity">
     </activity>
   </application>
 

@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:id="@+id/activity_search_view"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/activity_licences_view"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:focusable="true"
   android:focusableInTouchMode="true"
   android:background="@color/primary_light"
-  tools:context=".search_with_results.SearchActivityView">
+  tools:context=".licenses.LicensesActivityView">
 
   <android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar_activity_search_view"
-    android:minHeight="?attr/actionBarSize"
+    android:id="@+id/toolbar_licenses"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="2dp"
-    app:titleTextColor="@android:color/black"
-    android:background="@color/primary">
+    android:background="@color/primary"
+    android:minHeight="?attr/actionBarSize"
+    app:titleTextColor="@android:color/black">
   </android.support.v7.widget.Toolbar>
 
   <TextView
-    android:id="@+id/errorMessage"
+    android:id="@+id/informationTextView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/toolbar_activity_search_view"
-    android:textColor="@android:color/holo_red_dark"
-    android:visibility="gone"/>
-
+    android:gravity="center"
+    android:layout_below="@+id/toolbar_licenses"
+    android:text="@string/info_about_licences_list"/>
   <ScrollView
     android:id="@+id/scrollViewLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/errorMessage">
+    android:layout_below="@+id/informationTextView"
+    android:layout_marginTop="0dp">
 
     <android.support.v7.widget.RecyclerView
-      android:id="@+id/itemsRecyclerView"
+      android:id="@+id/licencesDisplayRecyclerView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:scrollbars="vertical"/>
   </ScrollView>
 
 </RelativeLayout>
+
+
+
+

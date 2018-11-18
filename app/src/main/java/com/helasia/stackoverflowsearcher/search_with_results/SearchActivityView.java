@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
 import com.helasia.stackoverflowsearcher.details.WebViewActivity;
+import com.helasia.stackoverflowsearcher.licenses.LicensesActivityView;
 import com.helasia.stackoverflowsearcher.utils.Constant;
 
 public class SearchActivityView extends AppCompatActivity implements SearchContract.View {
@@ -45,6 +46,11 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
   }
 
   @Override
+  protected void onStop() {
+    super.onStop();
+  }
+
+  @Override
   public Context getContext() {
     return context;
   }
@@ -62,6 +68,7 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
   @Override
   public void setToolbar() {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity_search_view);
+    toolbar.setTitle(R.string.title_with_font);
     setSupportActionBar(toolbar);
   }
 
@@ -70,6 +77,7 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
     Intent intent = new Intent(SearchActivityView.this, WebViewActivity.class);
     intent.putExtra("url", url);
     startActivity(intent);
+    onStop();
   }
 
   @Override
@@ -82,6 +90,16 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
       @Override
       public boolean onMenuItemClick(MenuItem menuItem) {
         presenter.getItemsFromServer(presenter.getLastQueryFromPreferences());
+        return true;
+      }
+    });
+
+    MenuItem infoViewItem = menu.findItem(R.id.action_licenses);
+    infoViewItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+      @Override
+      public boolean onMenuItemClick(MenuItem menuItem) {
+        Intent intent = new Intent(SearchActivityView.this, LicensesActivityView.class);
+        startActivity(intent);
         return true;
       }
     });

@@ -16,6 +16,11 @@
       android:icon="@drawable/ic_refresh"
       android:title="@string/refresh_title"
       app:showAsAction="ifRoom"/>
+    <item
+      android:id="@+id/action_licenses"
+      android:icon="@drawable/ic_info"
+      android:title="@string/refresh_title"
+      app:showAsAction="ifRoom"/>
   </group>
 
 </menu>
