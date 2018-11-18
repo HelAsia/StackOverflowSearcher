@@ -2,8 +2,11 @@ package com.helasia.stackoverflowsearcher.search_with_results;
 
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.Item;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
 import com.helasia.stackoverflowsearcher.search_with_results.ResultCardsAdapter.OnShareWebViewDetailsListener;
@@ -28,13 +31,26 @@ public class SearchPresenter implements SearchContract.Presenter,
     }
   }
 
-
   @Override
   public void setRecyclerView(List<Item> itemList) {
     ResultCardsAdapter adapter = new ResultCardsAdapter(searchView.getContext(), itemList);
     searchView.getRecyclerView().setAdapter(adapter);
     searchView.getRecyclerView().setLayoutManager(new LinearLayoutManager(searchView.getContext()));
     adapter.setCallbackWebViewOnShareClickedListener(this);
+  }
+
+  @Override
+  public void setSwipeRefreshLayout() {
+    searchView.getSwipeRefreshLayout().setOnRefreshListener(new OnRefreshListener() {
+      @Override
+      public void onRefresh() {
+        getItemsFromServer(getLastQueryFromPreferences());
+      }
+    });
+    searchView.getSwipeRefreshLayout().setColorSchemeResources(R.color.primary,
+        android.R.color.holo_green_dark,
+        android.R.color.holo_orange_dark,
+        android.R.color.holo_blue_dark);
   }
 
   @Override
@@ -60,6 +76,7 @@ public class SearchPresenter implements SearchContract.Presenter,
   @Override
   public void onSuccess(List<Item> itemList) {
     setRecyclerView(itemList);
+    searchView.getSwipeRefreshLayout().setRefreshing(false);
   }
 
   @Override
