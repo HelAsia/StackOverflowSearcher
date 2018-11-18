@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
   @BindView(R.id.items_recycler_view) RecyclerView itemsRecyclerView;
   @BindView(R.id.error_message) TextView errorMessage;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
+//  @BindView(R.id.scroll_view_layout) ScrollView scrollView;
   private SearchContract.Presenter presenter;
   Context context;
 
@@ -44,6 +46,7 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
     if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
       setPortraitScreen();
       presenter.setSwipeRefreshLayout();
+
     }else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
       setLandscapeScreen();
       presenter.setSwipeRefreshLayout();
@@ -74,6 +77,11 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
   public SwipeRefreshLayout getSwipeRefreshLayout() {
     return swipeRefreshLayout;
   }
+
+/*  @Override
+  public ScrollView getScrollView() {
+    return scrollView;
+  }*/
 
   @Override
   public void setToolbar() {

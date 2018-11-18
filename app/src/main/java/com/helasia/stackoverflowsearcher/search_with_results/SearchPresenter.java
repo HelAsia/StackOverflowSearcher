@@ -4,8 +4,13 @@ import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.Item;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
@@ -33,10 +38,23 @@ public class SearchPresenter implements SearchContract.Presenter,
 
   @Override
   public void setRecyclerView(List<Item> itemList) {
-    ResultCardsAdapter adapter = new ResultCardsAdapter(searchView.getContext(), itemList);
+    final ResultCardsAdapter adapter = new ResultCardsAdapter(searchView.getContext(), itemList);
     searchView.getRecyclerView().setAdapter(adapter);
-    searchView.getRecyclerView().setLayoutManager(new LinearLayoutManager(searchView.getContext()));
+    final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(searchView.getContext());
+    searchView.getRecyclerView().setLayoutManager(linearLayoutManager);
     adapter.setCallbackWebViewOnShareClickedListener(this);
+
+    searchView.getRecyclerView().addOnScrollListener(new OnScrollListener() {
+      @Override
+      public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        if(linearLayoutManager.findFirstVisibleItemPosition() == 0){
+          searchView.getSwipeRefreshLayout().setEnabled(true);
+        }else{
+          searchView.getSwipeRefreshLayout().setEnabled(false);
+        }
+      }
+    });
   }
 
   @Override
