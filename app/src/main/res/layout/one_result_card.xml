@@ -22,14 +22,15 @@
     android:background="@color/primary_light"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
       android:id="@+id/user_info_and_title"
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
       <RelativeLayout
         android:id="@+id/user_name_and_avatar_layout"
-        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -50,17 +51,11 @@
       <TextView
         android:id="@+id/title"
         style="@style/TitleResult"
-        android:gravity="center"
-        android:layout_toEndOf="@+id/user_name_and_avatar_layout"
-        android:layout_toRightOf="@+id/user_name_and_avatar_layout"
-        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/title"/>
-
-
-    </RelativeLayout>
-
-
+    </LinearLayout>
 
     <LinearLayout
       android:id="@+id/answer_count_layout"

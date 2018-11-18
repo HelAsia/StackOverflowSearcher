@@ -1,5 +1,7 @@
 package com.helasia.stackoverflowsearcher.data.network;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.helasia.stackoverflowsearcher.utils.Constant;
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
@@ -19,10 +21,14 @@ public class RetrofitSingleton {
 
       client = builder.build();
 
+      Gson gson = new GsonBuilder()
+          .setLenient()
+          .create();
+
       retrofit = new retrofit2.Retrofit.Builder()
           .baseUrl(Constant.BASE_URL)
           .client(client)
-          .addConverterFactory(GsonConverterFactory.create())
+          .addConverterFactory(GsonConverterFactory.create(gson))
           .build();
     }
     return retrofit;
