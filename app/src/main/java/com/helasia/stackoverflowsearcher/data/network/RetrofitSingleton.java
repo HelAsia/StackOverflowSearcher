@@ -16,8 +16,8 @@ public class RetrofitSingleton {
 
       OkHttpClient client;
       OkHttpClient.Builder builder = new OkHttpClient.Builder()
-          .readTimeout(360, TimeUnit.SECONDS)
-          .connectTimeout(360, TimeUnit.SECONDS);
+          .readTimeout(Constant.GLOBAL_TIMEOUT_PARAMETER, TimeUnit.SECONDS)
+          .connectTimeout(Constant.GLOBAL_TIMEOUT_PARAMETER, TimeUnit.SECONDS);
 
       client = builder.build();
 

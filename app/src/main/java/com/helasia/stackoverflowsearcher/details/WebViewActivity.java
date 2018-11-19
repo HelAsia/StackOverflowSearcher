@@ -22,14 +22,22 @@ public class WebViewActivity extends AppCompatActivity {
     context = getApplicationContext();
 
     setToolbar();
-    setWebView();
+    setWebView(getUrl());
   }
 
-  public void setWebView(){
-    Intent i = getIntent();
-    String url= i.getStringExtra("url");
+  public String getUrl(){
+    String url;
+    try{
+      Intent i = getIntent();
+      url = i.getStringExtra("url");
+    }catch(NullPointerException e){
+      url = "https://stackoverflow.com/";
+    }
+    return url;
+  }
+
+  public void setWebView(String url){
     WebView webView = (WebView) findViewById(R.id.web_view);
-    webView.getSettings().setJavaScriptEnabled(true);
     webView.setWebViewClient(new WebViewClient());
     webView.loadUrl(url);
   }

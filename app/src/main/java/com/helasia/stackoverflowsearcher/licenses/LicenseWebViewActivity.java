@@ -29,7 +29,6 @@ public class LicenseWebViewActivity extends AppCompatActivity {
     Intent i = getIntent();
     String url= i.getStringExtra("url");
     WebView webView = (WebView) findViewById(R.id.web_view);
-    webView.getSettings().setJavaScriptEnabled(true);
     webView.setWebViewClient(new WebViewClient());
     webView.loadUrl(url);
   }

@@ -19,6 +19,7 @@ public class SearchPresenter implements SearchContract.Presenter,
     QueryRepository.OnQueryResultDisplayListener{
   private QueryRepository queryRepository;
   private SearchContract.View searchView;
+  private LinearLayoutManager linearLayoutManager;
 
   public SearchPresenter(SearchContract.View searchView, QueryRepository queryRepository){
     this.queryRepository = queryRepository;
@@ -35,15 +36,37 @@ public class SearchPresenter implements SearchContract.Presenter,
   @Override
   public void setRecyclerView(List<Item> itemList) {
     if(itemList == null){
-      searchView.getErrorMessageTextView().setVisibility(View.VISIBLE);
-      searchView.getErrorMessageTextView().setText(searchView.getContext().getResources().getString(R.string.empty_list_error));
+      showErrorMessage(searchView.getContext().getResources()
+          .getString(R.string.empty_list_error));
     }else{
-      final ResultCardsAdapter adapter = new ResultCardsAdapter(searchView.getContext(), itemList);
+      setLinearLayoutForRecyclerView(itemList);
+      setSwipeRefreshLayoutEnabledStatus();
+    }
+  }
+
+  @Override
+  public void showErrorMessage(String errorMessageText){
+    if(searchView != null) {
+      searchView.getErrorMessageTextView().setVisibility(View.VISIBLE);
+      searchView.getErrorMessageTextView().setText(errorMessageText);
+    }
+  }
+
+  @Override
+  public void setLinearLayoutForRecyclerView(List<Item> itemList){
+    if(searchView != null){
+      final ResultCardsAdapter adapter = new ResultCardsAdapter(searchView.getContext(),
+          itemList);
       searchView.getRecyclerView().setAdapter(adapter);
-      final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(searchView.getContext());
+      linearLayoutManager = new LinearLayoutManager(searchView.getContext());
       searchView.getRecyclerView().setLayoutManager(linearLayoutManager);
       adapter.setCallbackWebViewOnShareClickedListener(this);
+    }
+  }
 
+  @Override
+  public void setSwipeRefreshLayoutEnabledStatus(){
+    if(searchView != null && linearLayoutManager != null){
       searchView.getRecyclerView().addOnScrollListener(new OnScrollListener() {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -60,21 +83,25 @@ public class SearchPresenter implements SearchContract.Presenter,
 
   @Override
   public void setSwipeRefreshLayout() {
-    searchView.getSwipeRefreshLayout().setOnRefreshListener(new OnRefreshListener() {
-      @Override
-      public void onRefresh() {
-        getItemsFromServer(getLastQueryFromPreferences());
-      }
-    });
-    searchView.getSwipeRefreshLayout().setColorSchemeResources(R.color.primary,
-        android.R.color.holo_green_dark,
-        android.R.color.holo_orange_dark,
-        android.R.color.holo_blue_dark);
+    if(searchView != null) {
+      searchView.getSwipeRefreshLayout().setOnRefreshListener(new OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+          getItemsFromServer(getLastQueryFromPreferences());
+        }
+      });
+      searchView.getSwipeRefreshLayout().setColorSchemeResources(R.color.primary,
+          android.R.color.holo_green_dark,
+          android.R.color.holo_orange_dark,
+          android.R.color.holo_blue_dark);
+    }
   }
 
   @Override
   public void getItemsFromServer(String title) {
-    queryRepository.getQueryResult(title, this);
+    if(queryRepository != null){
+      queryRepository.getQueryResult(title, this);
+    }
   }
 
   @Override
@@ -85,22 +112,27 @@ public class SearchPresenter implements SearchContract.Presenter,
 
   @Override
   public void shareCardClicked(String url) {
-    if(searchView.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-      searchView.goToDetails(url);
-    }else {
-      searchView.goToFragment(url);
+    if(searchView != null) {
+      if (searchView.getContext().getResources().getConfiguration().orientation
+          == Configuration.ORIENTATION_PORTRAIT) {
+        searchView.goToDetails(url);
+      } else {
+        searchView.goToFragment(url);
+      }
     }
   }
 
   @Override
   public void onSuccess(List<Item> itemList) {
-    setRecyclerView(itemList);
-    searchView.getSwipeRefreshLayout().setRefreshing(false);
+    if(searchView != null){
+      setRecyclerView(itemList);
+      searchView.getErrorMessageTextView().setVisibility(View.GONE);
+      searchView.getSwipeRefreshLayout().setRefreshing(false);
+    }
   }
 
   @Override
-  public void  onError(String errorMessageText) {
-    searchView.getErrorMessageTextView().setVisibility(View.VISIBLE);
-    searchView.getErrorMessageTextView().setText(errorMessageText);
+  public void onError(String errorMessageText) {
+    showErrorMessage(errorMessageText);
   }
 }

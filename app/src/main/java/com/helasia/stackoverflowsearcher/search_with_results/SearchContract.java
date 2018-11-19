@@ -26,6 +26,9 @@ public interface SearchContract {
     void getItemsFromServer(String title);
     String getLastQueryFromPreferences();
     void setRecyclerView(List<Item> itemList);
+    void showErrorMessage(String errorMessageText);
+    void setLinearLayoutForRecyclerView(List<Item> itemList);
+    void setSwipeRefreshLayoutEnabledStatus();
     void setSwipeRefreshLayout();
   }
 }

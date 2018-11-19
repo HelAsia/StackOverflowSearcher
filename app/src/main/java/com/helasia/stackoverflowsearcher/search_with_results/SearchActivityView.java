@@ -58,6 +58,21 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
   }
 
   @Override
+  protected void onDestroy() {
+    super.onDestroy();
+  }
+
+  @Override
+  protected void onRestart() {
+    super.onRestart();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+  }
+
+  @Override
   public Context getContext() {
     return context;
   }

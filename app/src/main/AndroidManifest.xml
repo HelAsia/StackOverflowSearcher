@@ -31,5 +31,4 @@
     <activity android:name=".licenses.LicenseWebViewActivity">
     </activity>
   </application>
-
 </manifest>
