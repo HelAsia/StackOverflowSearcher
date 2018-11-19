@@ -9,8 +9,8 @@
   <string name="details">Details</string>
 
   <string name="info_about_licences_list">If You want to know something about license, You have to click on card. </string>
-
   <string name="licences">Licences</string>
+  <string name="empty_list_error">You do not have cards to show!</string>
 
   <string name="license_one_name">Support Library Packages</string>
   <string name="license_one_author"> </string>
@@ -53,8 +53,5 @@
   <string name="license_eight_url">https://stackoverflow.com/</string>
 
   <string name="title_with_font">stack<b>overflow</b>searcher</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

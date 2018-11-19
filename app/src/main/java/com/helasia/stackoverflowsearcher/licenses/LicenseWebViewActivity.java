@@ -46,6 +46,7 @@ public class LicenseWebViewActivity extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item){
     Intent intent = new Intent(context, SearchActivityView.class);
     startActivity(intent);
+    LicenseWebViewActivity.this.finish();
     return true;
   }
 }

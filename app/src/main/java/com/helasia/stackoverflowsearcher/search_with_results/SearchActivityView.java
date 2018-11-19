@@ -33,7 +33,6 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
   @BindView(R.id.items_recycler_view) RecyclerView itemsRecyclerView;
   @BindView(R.id.error_message) TextView errorMessage;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
-//  @BindView(R.id.scroll_view_layout) ScrollView scrollView;
   private SearchContract.Presenter presenter;
   Context context;
 
@@ -77,11 +76,6 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
   public SwipeRefreshLayout getSwipeRefreshLayout() {
     return swipeRefreshLayout;
   }
-
-/*  @Override
-  public ScrollView getScrollView() {
-    return scrollView;
-  }*/
 
   @Override
   public void setToolbar() {

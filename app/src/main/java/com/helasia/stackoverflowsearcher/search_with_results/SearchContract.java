@@ -3,7 +3,6 @@ package com.helasia.stackoverflowsearcher.search_with_results;
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import com.helasia.stackoverflowsearcher.data.model.Item;
 import java.util.List;
@@ -15,7 +14,6 @@ public interface SearchContract {
     RecyclerView getRecyclerView();
     TextView getErrorMessageTextView();
     SwipeRefreshLayout getSwipeRefreshLayout();
-//    ScrollView getScrollView();
     void goToDetails(String url);
     void goToFragment(String url);
     void setFirstFragment();
