@@ -11,5 +11,4 @@ public interface QueryRepositoryInterface {
   }
 
   void getQueryResult(String title, OnQueryResultDisplayListener listener);
-
 }

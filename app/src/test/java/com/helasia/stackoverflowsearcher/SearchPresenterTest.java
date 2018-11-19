@@ -19,9 +19,9 @@ public class SearchPresenterTest {
 
   @Test
   public void getLastQueryFromPreferences_checkReturnedValue(){
-    when(mockSearchPresenter.getLastQueryFromPreferences()).thenReturn("test");
+    when(mockSearchPresenter.getLastQueryFromPreferences()).thenReturn("QueryRepositoryTest");
 
-    assertEquals(mockSearchPresenter.getLastQueryFromPreferences(), "test");
+    assertEquals(mockSearchPresenter.getLastQueryFromPreferences(), "QueryRepositoryTest");
     assertNotEquals(mockSearchPresenter.getLastQueryFromPreferences(), "test2");
     verify(mockSearchPresenter, times(2)).getLastQueryFromPreferences();
   }

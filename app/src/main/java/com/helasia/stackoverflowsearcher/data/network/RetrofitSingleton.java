@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitSingleton {
   private static Retrofit retrofit = null;
 
-  public static Retrofit getRetrofitInstance(){
+  public static Retrofit getRetrofitInstance(String baseURL){
     if(retrofit == null){
 
       OkHttpClient client;
@@ -25,8 +25,12 @@ public class RetrofitSingleton {
           .setLenient()
           .create();
 
+      if (baseURL == null) {
+        baseURL = Constant.BASE_URL;
+      }
+
       retrofit = new retrofit2.Retrofit.Builder()
-          .baseUrl(Constant.BASE_URL)
+          .baseUrl(baseURL)
           .client(client)
           .addConverterFactory(GsonConverterFactory.create(gson))
           .build();

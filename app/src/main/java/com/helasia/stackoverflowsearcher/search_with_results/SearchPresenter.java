@@ -1,12 +1,16 @@
 package com.helasia.stackoverflowsearcher.search_with_results;
 
+import android.app.Activity;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.Item;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;

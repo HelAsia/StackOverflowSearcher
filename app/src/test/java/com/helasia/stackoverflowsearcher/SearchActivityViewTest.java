@@ -35,7 +35,7 @@ public class SearchActivityViewTest {
   }
   @Test
   public void startWebViewActivityTest() {
-    mockPresenter.shareCardClicked("test");
+    mockPresenter.shareCardClicked("QueryRepositoryTest");
 
     ShadowActivity shadowActivity = shadowOf(searchActivityView);
     Intent startedIntent = shadowActivity.getNextStartedActivity();

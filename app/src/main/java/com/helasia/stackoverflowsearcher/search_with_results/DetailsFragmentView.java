@@ -58,7 +58,6 @@ public class DetailsFragmentView extends Fragment {
 
   public void setWebView(String url){
     WebView webView = (WebView)getView().findViewById(R.id.web_view);
-    webView.getSettings().setJavaScriptEnabled(true);
     webView.setWebViewClient(new WebViewClient());
     webView.loadUrl(url);
   }

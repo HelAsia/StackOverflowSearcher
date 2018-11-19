@@ -1,5 +1,7 @@
 package com.helasia.stackoverflowsearcher.search_with_results;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +32,7 @@ import com.helasia.stackoverflowsearcher.licenses.LicensesActivityView;
 import com.helasia.stackoverflowsearcher.utils.Constant;
 
 public class SearchActivityView extends AppCompatActivity implements SearchContract.View {
+  public static final int PLEASE_WAIT_DIALOG = 1;
   @BindView(R.id.items_recycler_view) RecyclerView itemsRecyclerView;
   @BindView(R.id.error_message) TextView errorMessage;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
