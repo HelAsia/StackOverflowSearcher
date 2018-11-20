@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
@@ -179,6 +180,7 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
       public boolean onQueryTextSubmit(String title) {
         saveLastQueryInPreferences(title);
         presenter.getItemsFromServer(title);
+        searchViewAndroidActionBar.clearFocus();
         return true;
       }
 
