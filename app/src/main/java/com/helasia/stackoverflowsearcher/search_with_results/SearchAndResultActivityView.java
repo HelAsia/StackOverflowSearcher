@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 import butterknife.BindView;
@@ -175,6 +174,7 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
 
     MenuItem searchViewItem = menu.findItem(R.id.action_search);
     final SearchView searchViewAndroidActionBar = (SearchView) MenuItemCompat.getActionView(searchViewItem);
+    searchViewAndroidActionBar.isBaselineAligned();
     searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
       @Override
       public boolean onQueryTextSubmit(String title) {
