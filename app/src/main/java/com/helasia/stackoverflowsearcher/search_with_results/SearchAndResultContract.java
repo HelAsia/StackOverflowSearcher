@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.helasia.stackoverflowsearcher.data.model.Item;
 import java.util.List;
 
-public interface SearchContract {
+public interface SearchAndResultContract {
   interface View{
     Context getContext();
     void setToolbar();
@@ -16,9 +16,11 @@ public interface SearchContract {
     SwipeRefreshLayout getSwipeRefreshLayout();
     void goToDetails(String url);
     void goToFragment(String url);
+    ResultDetailsFragmentView getFragmentWithArgs(String url);
     void setFirstFragment();
     void setPortraitScreen();
     void setLandscapeScreen();
+    void saveLastQueryInPreferences(String title);
   }
 
   interface Presenter{

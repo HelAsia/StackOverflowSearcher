@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.License;
-import com.helasia.stackoverflowsearcher.search_with_results.SearchActivityView;
+import com.helasia.stackoverflowsearcher.search_with_results.SearchAndResultActivityView;
 import java.util.List;
 
 public class LicensesActivityView extends AppCompatActivity implements LicensesContract.View {
@@ -76,7 +76,7 @@ public class LicensesActivityView extends AppCompatActivity implements LicensesC
   }
 
   public boolean onOptionsItemSelected(MenuItem item){
-    Intent intent = new Intent(context, SearchActivityView.class);
+    Intent intent = new Intent(context, SearchAndResultActivityView.class);
     startActivity(intent);
     return true;
   }

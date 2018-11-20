@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.helasia.stackoverflowsearcher.R;
-import com.helasia.stackoverflowsearcher.search_with_results.SearchActivityView;
+import com.helasia.stackoverflowsearcher.search_with_results.SearchAndResultActivityView;
 
 public class LicenseWebViewActivity extends AppCompatActivity {
   private Context context;
@@ -43,7 +43,7 @@ public class LicenseWebViewActivity extends AppCompatActivity {
   }
 
   public boolean onOptionsItemSelected(MenuItem item){
-    Intent intent = new Intent(context, SearchActivityView.class);
+    Intent intent = new Intent(context, SearchAndResultActivityView.class);
     startActivity(intent);
     LicenseWebViewActivity.this.finish();
     return true;

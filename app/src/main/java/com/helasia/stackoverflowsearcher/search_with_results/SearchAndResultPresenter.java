@@ -1,16 +1,12 @@
 package com.helasia.stackoverflowsearcher.search_with_results;
 
-import android.app.Activity;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.Item;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
@@ -18,14 +14,14 @@ import com.helasia.stackoverflowsearcher.search_with_results.ResultCardsAdapter.
 import com.helasia.stackoverflowsearcher.utils.Constant;
 import java.util.List;
 
-public class SearchPresenter implements SearchContract.Presenter,
+public class SearchAndResultPresenter implements SearchAndResultContract.Presenter,
     OnShareWebViewDetailsListener,
     QueryRepository.OnQueryResultDisplayListener{
   private QueryRepository queryRepository;
-  private SearchContract.View searchView;
+  private SearchAndResultContract.View searchView;
   private LinearLayoutManager linearLayoutManager;
 
-  public SearchPresenter(SearchContract.View searchView, QueryRepository queryRepository){
+  public SearchAndResultPresenter(SearchAndResultContract.View searchView, QueryRepository queryRepository){
     this.queryRepository = queryRepository;
     this.searchView = searchView;
   }
@@ -59,8 +55,7 @@ public class SearchPresenter implements SearchContract.Presenter,
   @Override
   public void setLinearLayoutForRecyclerView(List<Item> itemList){
     if(searchView != null){
-      final ResultCardsAdapter adapter = new ResultCardsAdapter(searchView.getContext(),
-          itemList);
+      final ResultCardsAdapter adapter = new ResultCardsAdapter(itemList);
       searchView.getRecyclerView().setAdapter(adapter);
       linearLayoutManager = new LinearLayoutManager(searchView.getContext());
       searchView.getRecyclerView().setLayoutManager(linearLayoutManager);

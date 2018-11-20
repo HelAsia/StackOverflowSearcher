@@ -1,7 +1,5 @@
 package com.helasia.stackoverflowsearcher.search_with_results;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,10 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.helasia.stackoverflowsearcher.R;
@@ -31,19 +27,18 @@ import com.helasia.stackoverflowsearcher.details.WebViewActivity;
 import com.helasia.stackoverflowsearcher.licenses.LicensesActivityView;
 import com.helasia.stackoverflowsearcher.utils.Constant;
 
-public class SearchActivityView extends AppCompatActivity implements SearchContract.View {
-  public static final int PLEASE_WAIT_DIALOG = 1;
+public class SearchAndResultActivityView extends AppCompatActivity implements SearchAndResultContract.View {
   @BindView(R.id.items_recycler_view) RecyclerView itemsRecyclerView;
   @BindView(R.id.error_message) TextView errorMessage;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
-  private SearchContract.Presenter presenter;
+  private SearchAndResultContract.Presenter presenter;
   Context context;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     context = getApplicationContext();
-    presenter = new SearchPresenter(this, new QueryRepository());
+    presenter = new SearchAndResultPresenter(this, new QueryRepository());
 
     if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
       setPortraitScreen();
@@ -104,7 +99,7 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
 
   @Override
   public void goToDetails(String url) {
-    Intent intent = new Intent(SearchActivityView.this, WebViewActivity.class);
+    Intent intent = new Intent(SearchAndResultActivityView.this, WebViewActivity.class);
     intent.putExtra("url", url);
     startActivity(intent);
     onStop();
@@ -112,22 +107,27 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
 
   @Override
   public void goToFragment(String url) {
-    Bundle data = new Bundle();
-    data.putString("url", url);
-    DetailsFragmentView detailsFragmentView = new DetailsFragmentView();
-    detailsFragmentView.setArguments(data);
     FragmentManager fragmentManager = this.getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    fragmentTransaction.replace(R.id.frame_layout_details, detailsFragmentView);
+    fragmentTransaction.replace(R.id.frame_layout_details, getFragmentWithArgs(url));
     fragmentTransaction.commit();
   }
 
   @Override
+  public ResultDetailsFragmentView getFragmentWithArgs(String url){
+    Bundle data = new Bundle();
+    data.putString("url", url);
+    ResultDetailsFragmentView resultDetailsFragmentView = new ResultDetailsFragmentView();
+    resultDetailsFragmentView.setArguments(data);
+    return resultDetailsFragmentView;
+  }
+
+  @Override
   public void setFirstFragment(){
-    DetailsFragmentView detailsFragmentView = new DetailsFragmentView();
+    ResultDetailsFragmentView resultDetailsFragmentView = new ResultDetailsFragmentView();
     FragmentManager fragmentManagerDetails = this.getSupportFragmentManager();
     FragmentTransaction fragmentTransactionDetails = fragmentManagerDetails.beginTransaction();
-    fragmentTransactionDetails.replace(R.id.frame_layout_details, detailsFragmentView);
+    fragmentTransactionDetails.replace(R.id.frame_layout_details, resultDetailsFragmentView);
     fragmentTransactionDetails.commit();
   }
 
@@ -166,7 +166,7 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
     infoViewItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
       @Override
       public boolean onMenuItemClick(MenuItem menuItem) {
-        Intent intent = new Intent(SearchActivityView.this, LicensesActivityView.class);
+        Intent intent = new Intent(SearchAndResultActivityView.this, LicensesActivityView.class);
         startActivity(intent);
         return true;
       }
@@ -177,9 +177,7 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
     searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
       @Override
       public boolean onQueryTextSubmit(String title) {
-        SharedPreferences.Editor lastQuery = PreferenceManager.getDefaultSharedPreferences(context).edit();
-        lastQuery.putString(Constant.PREF_LAST_QUERY, title).apply();
-        lastQuery.commit();
+        saveLastQueryInPreferences(title);
         presenter.getItemsFromServer(title);
         return true;
       }
@@ -190,5 +188,12 @@ public class SearchActivityView extends AppCompatActivity implements SearchContr
       }
     });
     return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override
+  public void saveLastQueryInPreferences(String title){
+    SharedPreferences.Editor lastQuery = PreferenceManager.getDefaultSharedPreferences(context).edit();
+    lastQuery.putString(Constant.PREF_LAST_QUERY, title).apply();
+    lastQuery.commit();
   }
 }

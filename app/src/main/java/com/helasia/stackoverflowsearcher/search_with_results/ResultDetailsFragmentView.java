@@ -16,11 +16,11 @@ import com.helasia.stackoverflowsearcher.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsFragmentView extends Fragment {
+public class ResultDetailsFragmentView extends Fragment {
   Context context;
   View view;
 
-  public DetailsFragmentView() {
+  public ResultDetailsFragmentView() {
 
   }
 

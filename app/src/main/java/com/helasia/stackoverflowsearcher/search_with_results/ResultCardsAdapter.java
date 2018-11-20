@@ -24,7 +24,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.ViewHolder> {
-  private Context context;
   private List<Item> itemList;
   private OnShareWebViewDetailsListener callbackWebView;
 
@@ -36,8 +35,7 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
     void shareCardClicked(String url);
   }
 
-  public ResultCardsAdapter(Context context, List<Item> itemList){
-    this.context = context;
+  public ResultCardsAdapter(List<Item> itemList){
     this.itemList = itemList;
     setHasStableIds(true);
   }
@@ -109,7 +107,6 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
       userNameView.setText(userName);
       Picasso.get().load(avatarUrl).into(avatarView);
       answerCountView.setText(String.valueOf(answerCount));
-
     }
   }
 }

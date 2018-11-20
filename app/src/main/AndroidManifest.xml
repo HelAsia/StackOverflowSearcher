@@ -22,7 +22,7 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".search_with_results.SearchActivityView">
+    <activity android:name=".search_with_results.SearchAndResultActivityView">
     </activity>
     <activity android:name=".details.WebViewActivity">
     </activity>

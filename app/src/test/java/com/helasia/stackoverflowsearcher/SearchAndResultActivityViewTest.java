@@ -3,8 +3,8 @@ package com.helasia.stackoverflowsearcher;
 import android.content.Intent;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
 import com.helasia.stackoverflowsearcher.details.WebViewActivity;
-import com.helasia.stackoverflowsearcher.search_with_results.SearchActivityView;
-import com.helasia.stackoverflowsearcher.search_with_results.SearchPresenter;
+import com.helasia.stackoverflowsearcher.search_with_results.SearchAndResultActivityView;
+import com.helasia.stackoverflowsearcher.search_with_results.SearchAndResultPresenter;
 import org.junit.Before;;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,24 +20,24 @@ import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 16)
-public class SearchActivityViewTest {
-  private SearchActivityView searchActivityView;
+public class SearchAndResultActivityViewTest {
+  private SearchAndResultActivityView searchAndResultActivityView;
 
-  private SearchPresenter mockPresenter;
+  private SearchAndResultPresenter mockPresenter;
 
   @Mock
   private QueryRepository mockQueryRepository;
 
   @Before
   public void setUp(){
-    searchActivityView = Robolectric.buildActivity(SearchActivityView.class).create().get();
-    mockPresenter = new SearchPresenter(searchActivityView, mockQueryRepository);
+    searchAndResultActivityView = Robolectric.buildActivity(SearchAndResultActivityView.class).create().get();
+    mockPresenter = new SearchAndResultPresenter(searchAndResultActivityView, mockQueryRepository);
   }
   @Test
   public void startWebViewActivityTest() {
     mockPresenter.shareCardClicked("QueryRepositoryTest");
 
-    ShadowActivity shadowActivity = shadowOf(searchActivityView);
+    ShadowActivity shadowActivity = shadowOf(searchAndResultActivityView);
     Intent startedIntent = shadowActivity.getNextStartedActivity();
     assertThat(startedIntent.getComponent().getClassName(), equalTo(WebViewActivity.class.getName()));
   }
