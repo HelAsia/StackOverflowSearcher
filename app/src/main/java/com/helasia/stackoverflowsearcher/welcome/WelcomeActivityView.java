@@ -29,3 +29,4 @@ public class WelcomeActivityView extends AppCompatActivity {
     }, SPLASH_DISPLAY_LENGTH);
   }
 }
+

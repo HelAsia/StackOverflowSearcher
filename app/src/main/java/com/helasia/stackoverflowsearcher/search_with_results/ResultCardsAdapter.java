@@ -110,3 +110,4 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
     }
   }
 }
+

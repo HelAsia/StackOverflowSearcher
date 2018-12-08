@@ -135,3 +135,4 @@ public class SearchAndResultPresenter implements SearchAndResultContract.Present
     showErrorMessage(errorMessageText);
   }
 }
+

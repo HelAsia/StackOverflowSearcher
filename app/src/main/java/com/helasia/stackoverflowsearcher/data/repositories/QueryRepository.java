@@ -17,13 +17,13 @@ public class QueryRepository implements QueryRepositoryInterface {
 
   public QueryRepository() {
     this.baseURL = Constant.BASE_URL;
-    this.retrofit = RetrofitSingleton.getRetrofitInstance(this.baseURL);
+    this.retrofit = RetrofitSingleton.getInstance(this.baseURL).getRetrofit();
     this.searchAPI = retrofit.create(SearchAPI.class);
   }
 
   public QueryRepository(String url) {
     this.baseURL = url;
-    this.retrofit = RetrofitSingleton.getRetrofitInstance(this.baseURL);
+    this.retrofit = RetrofitSingleton.getInstance(this.baseURL).getRetrofit();
     this.searchAPI = retrofit.create(SearchAPI.class);
   }
 

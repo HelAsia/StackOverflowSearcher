@@ -61,5 +61,6 @@ public class ResultDetailsFragmentView extends Fragment {
     webView.setWebViewClient(new WebViewClient());
     webView.loadUrl(url);
   }
-
 }
+
+
