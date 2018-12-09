@@ -17,10 +17,6 @@ public interface SearchAndResultContract {
     void goToDetails(String url);
     void goToFragment(String url);
     ResultDetailsFragmentView getFragmentWithArgs(String url);
-    void setFirstFragment();
-    void setPortraitScreen();
-    void setLandscapeScreen();
-    void saveLastQueryInPreferences(String title);
   }
 
   interface Presenter{
@@ -32,5 +28,6 @@ public interface SearchAndResultContract {
     void setLinearLayoutForRecyclerView(List<Item> itemList);
     void setSwipeRefreshLayoutEnabledStatus();
     void setSwipeRefreshLayout();
+    void saveLastQueryInPreferences(String title);
   }
 }

@@ -1,5 +1,6 @@
 package com.helasia.stackoverflowsearcher.search_with_results;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -133,6 +134,14 @@ public class SearchAndResultPresenter implements SearchAndResultContract.Present
   @Override
   public void onError(String errorMessageText) {
     showErrorMessage(errorMessageText);
+  }
+
+
+  @Override
+  public void saveLastQueryInPreferences(String title){
+    SharedPreferences.Editor lastQuery = PreferenceManager.getDefaultSharedPreferences(searchView.getContext()).edit();
+    lastQuery.putString(Constant.PREF_LAST_QUERY, title).apply();
+    lastQuery.commit();
   }
 }
 

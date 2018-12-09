@@ -31,8 +31,9 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
   @BindView(R.id.items_recycler_view) RecyclerView itemsRecyclerView;
   @BindView(R.id.error_message) TextView errorMessage;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
-  private SearchAndResultContract.Presenter presenter;
-  Context context;
+  private SearchAndResultContract.Presenter presenter =
+          new SearchAndResultPresenter(this, new QueryRepository());;
+  private Context context;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,35 +41,10 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
     setContentView(R.layout.activity_search_view);
     ButterKnife.bind(this);
     context = getApplicationContext();
-    presenter = new SearchAndResultPresenter(this, new QueryRepository());
 
     setToolbar();
     presenter.setFirstScreen();
     presenter.setSwipeRefreshLayout();
-
-    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-      setFirstFragment();
-    }
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-  }
-
-  @Override
-  protected void onRestart() {
-    super.onRestart();
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
   }
 
   @Override
@@ -103,7 +79,7 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
     Intent intent = new Intent(SearchAndResultActivityView.this, WebViewActivity.class);
     intent.putExtra("url", url);
     startActivity(intent);
-    onStop();
+    SearchAndResultActivityView.this.finish();
   }
 
   @Override
@@ -121,32 +97,6 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
     ResultDetailsFragmentView resultDetailsFragmentView = new ResultDetailsFragmentView();
     resultDetailsFragmentView.setArguments(data);
     return resultDetailsFragmentView;
-  }
-
-  @Override
-  public void setFirstFragment(){
-    ResultDetailsFragmentView resultDetailsFragmentView = new ResultDetailsFragmentView();
-    FragmentManager fragmentManagerDetails = this.getSupportFragmentManager();
-    FragmentTransaction fragmentTransactionDetails = fragmentManagerDetails.beginTransaction();
-    fragmentTransactionDetails.replace(R.id.frame_layout_details, resultDetailsFragmentView);
-    fragmentTransactionDetails.commit();
-  }
-
-  @Override
-  public void setPortraitScreen(){
-    setContentView(R.layout.activity_search_view);
-    ButterKnife.bind(this);
-    setToolbar();
-    presenter.setFirstScreen();
-  }
-
-  @Override
-  public void setLandscapeScreen(){
-    setContentView(R.layout.activity_search_view);
-    ButterKnife.bind(this);
-    setToolbar();
-    presenter.setFirstScreen();
-    setFirstFragment();
   }
 
   @Override
@@ -179,7 +129,7 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
     searchViewAndroidActionBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
       @Override
       public boolean onQueryTextSubmit(String title) {
-        saveLastQueryInPreferences(title);
+        presenter.saveLastQueryInPreferences(title);
         presenter.getItemsFromServer(title);
         searchViewAndroidActionBar.clearFocus();
         return true;
@@ -191,12 +141,5 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
       }
     });
     return super.onCreateOptionsMenu(menu);
-  }
-
-  @Override
-  public void saveLastQueryInPreferences(String title){
-    SharedPreferences.Editor lastQuery = PreferenceManager.getDefaultSharedPreferences(context).edit();
-    lastQuery.putString(Constant.PREF_LAST_QUERY, title).apply();
-    lastQuery.commit();
   }
 }
