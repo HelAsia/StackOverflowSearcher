@@ -37,16 +37,17 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_search_view);
+    ButterKnife.bind(this);
     context = getApplicationContext();
     presenter = new SearchAndResultPresenter(this, new QueryRepository());
 
-    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-      setPortraitScreen();
-      presenter.setSwipeRefreshLayout();
+    setToolbar();
+    presenter.setFirstScreen();
+    presenter.setSwipeRefreshLayout();
 
-    }else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-      setLandscapeScreen();
-      presenter.setSwipeRefreshLayout();
+    if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+      setFirstFragment();
     }
   }
 
@@ -133,7 +134,7 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
 
   @Override
   public void setPortraitScreen(){
-    setContentView(R.layout.activity_search_view_portrait);
+    setContentView(R.layout.activity_search_view);
     ButterKnife.bind(this);
     setToolbar();
     presenter.setFirstScreen();
@@ -141,7 +142,7 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
 
   @Override
   public void setLandscapeScreen(){
-    setContentView(R.layout.activity_search_view_landscape);
+    setContentView(R.layout.activity_search_view);
     ButterKnife.bind(this);
     setToolbar();
     presenter.setFirstScreen();

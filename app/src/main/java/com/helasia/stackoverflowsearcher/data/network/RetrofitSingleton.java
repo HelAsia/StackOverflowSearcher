@@ -14,7 +14,6 @@ public class RetrofitSingleton {
 
   private RetrofitSingleton(String baseURL){
     createRetrofitInstance(baseURL);
-
   }
 
   public static RetrofitSingleton getInstance(String baseURL){
