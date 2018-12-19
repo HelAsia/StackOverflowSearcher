@@ -57,33 +57,6 @@ public class Item {
   @Expose
   private Integer bountyClosesDate;
 
-  public Item(){
-
-  }
-
-  public Item(List<String> tags, Owner owner, Boolean isAnswered, Integer viewCount,
-      Integer answerCount, Integer score, Integer lastActivityDate, Integer creationDate,
-      Integer questionId, String link, String title, Integer acceptedAnswerId,
-      Integer lastEditDate, Integer closedDate, String closedReason, Integer bountyAmount,
-      Integer bountyClosesDate) {
-    this.tags = tags;
-    this.owner = owner;
-    this.isAnswered = isAnswered;
-    this.viewCount = viewCount;
-    this.answerCount = answerCount;
-    this.score = score;
-    this.lastActivityDate = lastActivityDate;
-    this.creationDate = creationDate;
-    this.questionId = questionId;
-    this.link = link;
-    this.title = title;
-    this.acceptedAnswerId = acceptedAnswerId;
-    this.lastEditDate = lastEditDate;
-    this.closedDate = closedDate;
-    this.closedReason = closedReason;
-    this.bountyAmount = bountyAmount;
-    this.bountyClosesDate = bountyClosesDate;
-  }
 
   public List<String> getTags() {
     return tags;

@@ -27,23 +27,6 @@ public class QueryResult {
   @Expose
   private String errorName;
 
-  public QueryResult(){
-
-  }
-
-  public QueryResult(List<Item> items, Boolean hasMore, Integer quotaMax,
-      Integer quotaRemaining) {
-    this.items = items;
-    this.hasMore = hasMore;
-    this.quotaMax = quotaMax;
-    this.quotaRemaining = quotaRemaining;
-  }
-
-  public QueryResult(Integer errorId, String errorMessage, String errorName) {
-    this.errorId = errorId;
-    this.errorMessage = errorMessage;
-    this.errorName = errorName;
-  }
 
   public List<Item> getItems() {
     return items;

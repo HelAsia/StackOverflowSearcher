@@ -1,9 +1,8 @@
-package com.helasia.stackoverflowsearcher.search_with_results;
+package com.helasia.stackoverflowsearcher.searchWithResults;
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.OnScrollListener;
@@ -11,7 +10,7 @@ import android.view.View;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.Item;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
-import com.helasia.stackoverflowsearcher.search_with_results.ResultCardsAdapter.OnShareWebViewDetailsListener;
+import com.helasia.stackoverflowsearcher.searchWithResults.ResultCardsAdapter.OnShareWebViewDetailsListener;
 import com.helasia.stackoverflowsearcher.utils.Constant;
 import java.util.List;
 
@@ -84,12 +83,7 @@ public class SearchAndResultPresenter implements SearchAndResultContract.Present
   @Override
   public void setSwipeRefreshLayout() {
     if(searchView != null) {
-      searchView.getSwipeRefreshLayout().setOnRefreshListener(new OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-          getItemsFromServer(getLastQueryFromPreferences());
-        }
-      });
+      searchView.getSwipeRefreshLayout().setOnRefreshListener(() -> getItemsFromServer(getLastQueryFromPreferences()));
       searchView.getSwipeRefreshLayout().setColorSchemeResources(R.color.primary,
           android.R.color.holo_green_dark,
           android.R.color.holo_orange_dark,

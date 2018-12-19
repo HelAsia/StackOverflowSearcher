@@ -7,14 +7,19 @@ import java.util.List;
 
 public class LicensesPresenter implements LicensesContract.Presenter {
   private LicensesContract.View licensesView;
-  private List<License> licensesList = new ArrayList<>();
 
   public LicensesPresenter(LicensesContract.View licensesView){
     this.licensesView = licensesView;
   }
 
   @Override
-  public List<License> getLicensesList(){
+  public void setFirstScreen() {
+    licensesView.setToolbar();
+    licensesView.setRecyclerView(getLicensesList());
+  }
+
+  private List<License> getLicensesList(){
+    List<License> licensesList = new ArrayList<>();
     License licenseOne = new License(1,
         licensesView.getContext().getResources().getString(R.string.license_one_name),
         licensesView.getContext().getResources().getString(R.string.license_one_author),

@@ -10,7 +10,7 @@
   android:focusableInTouchMode="true"
   android:background="@color/primary_light"
   android:orientation="vertical"
-  tools:context=".search_with_results.SearchAndResultActivityView">
+  tools:context=".searchWithResults.SearchAndResultActivity">
 
   <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar_activity_search_view"

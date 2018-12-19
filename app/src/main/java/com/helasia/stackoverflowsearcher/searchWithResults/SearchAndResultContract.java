@@ -1,4 +1,4 @@
-package com.helasia.stackoverflowsearcher.search_with_results;
+package com.helasia.stackoverflowsearcher.searchWithResults;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,7 +16,7 @@ public interface SearchAndResultContract {
     SwipeRefreshLayout getSwipeRefreshLayout();
     void goToDetails(String url);
     void goToFragment(String url);
-    ResultDetailsFragmentView getFragmentWithArgs(String url);
+    ResultDetailsFragment getFragmentWithArgs(String url);
   }
 
   interface Presenter{

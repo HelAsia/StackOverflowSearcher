@@ -11,29 +11,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.License;
-import com.helasia.stackoverflowsearcher.search_with_results.SearchAndResultActivityView;
+import com.helasia.stackoverflowsearcher.searchWithResults.SearchAndResultActivity;
+
 import java.util.List;
 
-public class LicensesActivityView extends AppCompatActivity implements LicensesContract.View {
-  private LicensesContract.Presenter presenter;
-  private LicensesAdapter adapter;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class LicensesActivity extends AppCompatActivity implements LicensesContract.View {
+  @BindView(R.id.toolbar_licenses) Toolbar toolbar;
+  @BindView(R.id.licencesDisplayRecyclerView) RecyclerView recyclerView;
   private Context context;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_licenses_view);
+    ButterKnife.bind(this);
     context = getApplicationContext();
 
-    presenter = new LicensesPresenter(this);
-
-    setToolbar();
-    setRecyclerView(presenter.getLicensesList());
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
+    LicensesContract.Presenter presenter = new LicensesPresenter(this);
+    presenter.setFirstScreen();
   }
 
   @Override
@@ -42,42 +40,41 @@ public class LicensesActivityView extends AppCompatActivity implements LicensesC
   }
 
   @Override
+  public void onBackPressed() {
+    Intent intent = new Intent(this, SearchAndResultActivity.class);
+    startActivity(intent);
+    LicensesActivity.this.finish();
+  }
+
+  @Override
   public void setToolbar() {
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_licenses);
     toolbar.setTitle(R.string.title_with_font);
     setSupportActionBar(toolbar);
     ActionBar actionbar = getSupportActionBar();
-    actionbar.setDisplayHomeAsUpEnabled(true);
-    actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+    if(actionbar != null){
+      actionbar.setDisplayHomeAsUpEnabled(true);
+      actionbar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+    }
   }
 
   @Override
   public void setRecyclerView(List<License> licenseList){
-    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.licencesDisplayRecyclerView);
-    setAdapter(licenseList);
-    LicensesAdapter adapter = getAdapter();
+    LicensesAdapter adapter = new LicensesAdapter(this, licenseList);
     recyclerView.setAdapter(adapter);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-  }
-
-  public void setAdapter(List<License> licenseList){
-    this.adapter = new LicensesAdapter(this, licenseList);
-  }
-
-  public LicensesAdapter getAdapter(){
-    return adapter;
   }
 
   public void goToLicenseSource(String licenseUrl){
     Intent intent = new Intent(this, LicenseWebViewActivity.class);
     intent.putExtra("url", licenseUrl);
     startActivity(intent);
-    onStop();
+    LicensesActivity.this.finish();
   }
 
   public boolean onOptionsItemSelected(MenuItem item){
-    Intent intent = new Intent(context, SearchAndResultActivityView.class);
+    Intent intent = new Intent(this, SearchAndResultActivity.class);
     startActivity(intent);
+    LicensesActivity.this.finish();
     return true;
   }
 }

@@ -26,21 +26,6 @@ public class Owner {
   @Expose
   private Integer acceptRate;
 
-  public Owner(){
-
-  }
-
-  public Owner(Integer reputation, Integer userId, String userType, String profileImage,
-      String displayName, String link, Integer acceptRate) {
-    this.reputation = reputation;
-    this.userId = userId;
-    this.userType = userType;
-    this.profileImage = profileImage;
-    this.displayName = displayName;
-    this.link = link;
-    this.acceptRate = acceptRate;
-  }
-
   public Integer getReputation() {
     return reputation;
   }

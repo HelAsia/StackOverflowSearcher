@@ -8,14 +8,13 @@
 
   <application
     android:allowBackup="true"
-
     android:hardwareAccelerated="true"
-    android:icon="@mipmap/stack_overflow_searcher_app_logo"
+    android:icon="@drawable/stack_overflow_small_logo"
     android:label="@string/app_name"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/MyAppTheme">
-    <activity android:name=".welcome.WelcomeActivityView">
+    <activity android:name=".welcome.WelcomeActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <action android:name="android.intent.action.VIEW"/>
@@ -23,11 +22,11 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".search_with_results.SearchAndResultActivityView">
+    <activity android:name=".searchWithResults.SearchAndResultActivity">
     </activity>
     <activity android:name=".details.WebViewActivity">
     </activity>
-    <activity android:name=".licenses.LicensesActivityView">
+    <activity android:name=".licenses.LicensesActivity">
     </activity>
     <activity android:name=".licenses.LicenseWebViewActivity">
     </activity>

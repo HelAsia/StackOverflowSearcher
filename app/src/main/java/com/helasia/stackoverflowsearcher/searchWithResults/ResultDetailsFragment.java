@@ -1,7 +1,5 @@
-package com.helasia.stackoverflowsearcher.search_with_results;
+package com.helasia.stackoverflowsearcher.searchWithResults;
 
-
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,18 +14,16 @@ import com.helasia.stackoverflowsearcher.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ResultDetailsFragmentView extends Fragment {
-  Context context;
+public class ResultDetailsFragment extends Fragment {
   View view;
 
-  public ResultDetailsFragmentView() {
+  public ResultDetailsFragment() {
 
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    context = getActivity();
 
     View view = inflater.inflate(R.layout.fragment_details_fragment_view, container, false);
     setView(view);

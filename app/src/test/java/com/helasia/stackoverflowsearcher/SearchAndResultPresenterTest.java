@@ -6,7 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
-import com.helasia.stackoverflowsearcher.search_with_results.SearchAndResultPresenter;
+import com.helasia.stackoverflowsearcher.searchWithResults.SearchAndResultPresenter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

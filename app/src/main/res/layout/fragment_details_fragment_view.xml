@@ -4,7 +4,7 @@
   android:id="@+id/fragment_details_fragment_view"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".search_with_results.ResultDetailsFragmentView">
+  tools:context=".searchWithResults.ResultDetailsFragment">
 
   <ScrollView
     android:id="@+id/scrollViewWebLayout"

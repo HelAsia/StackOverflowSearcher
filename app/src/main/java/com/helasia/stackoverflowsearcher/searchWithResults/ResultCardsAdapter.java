@@ -1,7 +1,6 @@
-package com.helasia.stackoverflowsearcher.search_with_results;
+package com.helasia.stackoverflowsearcher.searchWithResults;
 
 import android.animation.Animator;
-import android.content.Context;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -18,8 +17,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.Item;
-import com.helasia.stackoverflowsearcher.data.model.QueryResult;
-import com.helasia.stackoverflowsearcher.utils.Constant;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
@@ -52,12 +49,9 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
   public void onBindViewHolder(@NonNull ResultCardsAdapter.ViewHolder viewHolder, final int position) {
     viewHolder.bind(itemList.get(position));
 
-    viewHolder.cardViewLayout.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        String url = itemList.get(position).getLink();
-        callbackWebView.shareCardClicked(url);
-      }
+    viewHolder.cardViewLayout.setOnClickListener(view -> {
+      String url = itemList.get(position).getLink();
+      callbackWebView.shareCardClicked(url);
     });
   }
 
@@ -98,15 +92,10 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
     }
 
     void bind(Item item){
-      String title = item.getTitle();
-      String userName = item.getOwner().getDisplayName();
-      String avatarUrl = item.getOwner().getProfileImage();
-      int answerCount = item.getAnswerCount();
-
-      titleView.setText(title);
-      userNameView.setText(userName);
-      Picasso.get().load(avatarUrl).into(avatarView);
-      answerCountView.setText(String.valueOf(answerCount));
+      titleView.setText(item.getTitle());
+      userNameView.setText(item.getOwner().getDisplayName());
+      Picasso.get().load(item.getOwner().getProfileImage()).into(avatarView);
+      answerCountView.setText(String.valueOf(item.getAnswerCount()));
     }
   }
 }

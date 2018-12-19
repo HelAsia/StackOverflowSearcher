@@ -3,8 +3,8 @@ package com.helasia.stackoverflowsearcher;
 import android.content.Intent;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
 import com.helasia.stackoverflowsearcher.details.WebViewActivity;
-import com.helasia.stackoverflowsearcher.search_with_results.SearchAndResultActivityView;
-import com.helasia.stackoverflowsearcher.search_with_results.SearchAndResultPresenter;
+import com.helasia.stackoverflowsearcher.searchWithResults.SearchAndResultActivity;
+import com.helasia.stackoverflowsearcher.searchWithResults.SearchAndResultPresenter;
 import org.junit.Before;;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +20,8 @@ import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 16)
-public class SearchAndResultActivityViewTest {
-  private SearchAndResultActivityView searchAndResultActivityView;
+public class SearchAndResultActivityTest {
+  private SearchAndResultActivity searchAndResultActivity;
 
   private SearchAndResultPresenter mockPresenter;
 
@@ -30,14 +30,14 @@ public class SearchAndResultActivityViewTest {
 
   @Before
   public void setUp(){
-    searchAndResultActivityView = Robolectric.buildActivity(SearchAndResultActivityView.class).create().get();
-    mockPresenter = new SearchAndResultPresenter(searchAndResultActivityView, mockQueryRepository);
+    searchAndResultActivity = Robolectric.buildActivity(SearchAndResultActivity.class).create().get();
+    mockPresenter = new SearchAndResultPresenter(searchAndResultActivity, mockQueryRepository);
   }
   @Test
   public void startWebViewActivityTest() {
     mockPresenter.shareCardClicked("QueryRepositoryTest");
 
-    ShadowActivity shadowActivity = shadowOf(searchAndResultActivityView);
+    ShadowActivity shadowActivity = shadowOf(searchAndResultActivity);
     Intent startedIntent = shadowActivity.getNextStartedActivity();
     assertThat(startedIntent.getComponent().getClassName(), equalTo(WebViewActivity.class.getName()));
   }

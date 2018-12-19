@@ -1,10 +1,7 @@
-package com.helasia.stackoverflowsearcher.search_with_results;
+package com.helasia.stackoverflowsearcher.searchWithResults;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
@@ -24,10 +21,9 @@ import butterknife.ButterKnife;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.repositories.QueryRepository;
 import com.helasia.stackoverflowsearcher.details.WebViewActivity;
-import com.helasia.stackoverflowsearcher.licenses.LicensesActivityView;
-import com.helasia.stackoverflowsearcher.utils.Constant;
+import com.helasia.stackoverflowsearcher.licenses.LicensesActivity;
 
-public class SearchAndResultActivityView extends AppCompatActivity implements SearchAndResultContract.View {
+public class SearchAndResultActivity extends AppCompatActivity implements SearchAndResultContract.View {
   @BindView(R.id.items_recycler_view) RecyclerView itemsRecyclerView;
   @BindView(R.id.error_message) TextView errorMessage;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout swipeRefreshLayout;
@@ -76,10 +72,10 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
 
   @Override
   public void goToDetails(String url) {
-    Intent intent = new Intent(SearchAndResultActivityView.this, WebViewActivity.class);
+    Intent intent = new Intent(SearchAndResultActivity.this, WebViewActivity.class);
     intent.putExtra("url", url);
     startActivity(intent);
-    SearchAndResultActivityView.this.finish();
+    SearchAndResultActivity.this.finish();
   }
 
   @Override
@@ -91,12 +87,12 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
   }
 
   @Override
-  public ResultDetailsFragmentView getFragmentWithArgs(String url){
+  public ResultDetailsFragment getFragmentWithArgs(String url){
     Bundle data = new Bundle();
     data.putString("url", url);
-    ResultDetailsFragmentView resultDetailsFragmentView = new ResultDetailsFragmentView();
-    resultDetailsFragmentView.setArguments(data);
-    return resultDetailsFragmentView;
+    ResultDetailsFragment resultDetailsFragment = new ResultDetailsFragment();
+    resultDetailsFragment.setArguments(data);
+    return resultDetailsFragment;
   }
 
   @Override
@@ -117,7 +113,7 @@ public class SearchAndResultActivityView extends AppCompatActivity implements Se
     infoViewItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
       @Override
       public boolean onMenuItemClick(MenuItem menuItem) {
-        Intent intent = new Intent(SearchAndResultActivityView.this, LicensesActivityView.class);
+        Intent intent = new Intent(SearchAndResultActivity.this, LicensesActivity.class);
         startActivity(intent);
         return true;
       }

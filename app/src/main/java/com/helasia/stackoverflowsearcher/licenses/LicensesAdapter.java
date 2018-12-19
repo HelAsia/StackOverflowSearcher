@@ -9,7 +9,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -39,15 +38,12 @@ public class LicensesAdapter extends RecyclerView.Adapter<LicensesAdapter.ViewHo
 
   @Override
   public void onBindViewHolder(final LicensesAdapter.ViewHolder viewHolder, final int position) {
-    viewHolder.bind(licensesList.get(position));
+    if(viewHolder != null){
+      viewHolder.bind(licensesList.get(position));
 
-    viewHolder.licenseCardViewLayout.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        ((LicensesActivityView)context).goToLicenseSource(licensesList.get(position).getLicenseUrl());
-      }
-    });
-
+      viewHolder.licenseCardViewLayout.setOnClickListener(view ->
+              ((LicensesActivity)context).goToLicenseSource(licensesList.get(position).getLicenseUrl()));
+    }
   }
 
   @Override

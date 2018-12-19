@@ -9,7 +9,7 @@
   android:focusable="true"
   android:focusableInTouchMode="true"
   android:background="@color/primary_light"
-  tools:context=".licenses.LicensesActivityView">
+  tools:context=".licenses.LicensesActivity">
 
   <android.support.v7.widget.Toolbar
     android:id="@+id/toolbar_licenses"

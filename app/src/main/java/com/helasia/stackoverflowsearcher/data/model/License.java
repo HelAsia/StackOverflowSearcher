@@ -7,20 +7,6 @@ public class License {
   private String licenseDescription;
   private String licenseUrl;
 
-  public License(String licenseName, String licenseAuthor, String licenseDescription) {
-    this.licenseName = licenseName;
-    this.licenseAuthor = licenseAuthor;
-    this.licenseDescription = licenseDescription;
-  }
-
-  public License(int licenseId, String licenseName, String licenseAuthor,
-      String licenseDescription) {
-    this.licenseId = licenseId;
-    this.licenseName = licenseName;
-    this.licenseAuthor = licenseAuthor;
-    this.licenseDescription = licenseDescription;
-  }
-
   public License(int licenseId, String licenseName, String licenseAuthor,
       String licenseDescription, String licenseUrl) {
     this.licenseId = licenseId;
