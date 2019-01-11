@@ -15,11 +15,9 @@ import com.helasia.stackoverflowsearcher.utils.Constant;
 import java.util.List;
 
 public class SearchAndResultPresenter implements SearchAndResultContract.Presenter,
-    OnShareWebViewDetailsListener,
     QueryRepository.OnQueryResultDisplayListener{
   private QueryRepository queryRepository;
   private SearchAndResultContract.View searchView;
-  private LinearLayoutManager linearLayoutManager;
 
   public SearchAndResultPresenter(SearchAndResultContract.View searchView, QueryRepository queryRepository){
     this.queryRepository = queryRepository;
@@ -28,66 +26,19 @@ public class SearchAndResultPresenter implements SearchAndResultContract.Present
 
   @Override
   public void setFirstScreen(){
+    searchView.setToolbar();
     if(!getLastQueryFromPreferences().equals("")){
-      getItemsFromServer(getLastQueryFromPreferences());
+      getItemsFromServer();
     }
+
+    searchView.setSwipeRefreshLayout();
   }
 
   @Override
-  public void setRecyclerView(List<Item> itemList) {
-    if(itemList == null){
-      showErrorMessage(searchView.getContext().getResources()
-          .getString(R.string.empty_list_error));
-    }else{
-      setLinearLayoutForRecyclerView(itemList);
-      setSwipeRefreshLayoutEnabledStatus();
-    }
-  }
-
-  @Override
-  public void showErrorMessage(String errorMessageText){
-    if(searchView != null) {
-      searchView.getErrorMessageTextView().setVisibility(View.VISIBLE);
-      searchView.getErrorMessageTextView().setText(errorMessageText);
-    }
-  }
-
-  @Override
-  public void setLinearLayoutForRecyclerView(List<Item> itemList){
-    if(searchView != null){
-      final ResultCardsAdapter adapter = new ResultCardsAdapter(itemList);
-      searchView.getRecyclerView().setAdapter(adapter);
-      linearLayoutManager = new LinearLayoutManager(searchView.getContext());
-      searchView.getRecyclerView().setLayoutManager(linearLayoutManager);
-      adapter.setCallbackWebViewOnShareClickedListener(this);
-    }
-  }
-
-  @Override
-  public void setSwipeRefreshLayoutEnabledStatus(){
-    if(searchView != null && linearLayoutManager != null){
-      searchView.getRecyclerView().addOnScrollListener(new OnScrollListener() {
-        @Override
-        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-          super.onScrolled(recyclerView, dx, dy);
-          if(linearLayoutManager.findFirstVisibleItemPosition() == 0){
-            searchView.getSwipeRefreshLayout().setEnabled(true);
-          }else{
-            searchView.getSwipeRefreshLayout().setEnabled(false);
-          }
-        }
-      });
-    }
-  }
-
-  @Override
-  public void setSwipeRefreshLayout() {
-    if(searchView != null) {
-      searchView.getSwipeRefreshLayout().setOnRefreshListener(() -> getItemsFromServer(getLastQueryFromPreferences()));
-      searchView.getSwipeRefreshLayout().setColorSchemeResources(R.color.primary,
-          android.R.color.holo_green_dark,
-          android.R.color.holo_orange_dark,
-          android.R.color.holo_blue_dark);
+  public void getItemsFromServer() {
+    if(queryRepository != null){
+      String title = getLastQueryFromPreferences();
+      queryRepository.getQueryResult(title, this);
     }
   }
 
@@ -105,31 +56,16 @@ public class SearchAndResultPresenter implements SearchAndResultContract.Present
   }
 
   @Override
-  public void shareCardClicked(String url) {
-    if(searchView != null) {
-      if (searchView.getContext().getResources().getConfiguration().orientation
-          == Configuration.ORIENTATION_PORTRAIT) {
-        searchView.goToDetails(url);
-      } else {
-        searchView.goToFragment(url);
-      }
-    }
-  }
-
-  @Override
   public void onSuccess(List<Item> itemList) {
     if(searchView != null){
-      setRecyclerView(itemList);
-      searchView.getErrorMessageTextView().setVisibility(View.GONE);
-      searchView.getSwipeRefreshLayout().setRefreshing(false);
+      searchView.setRecyclerView(itemList);
     }
   }
 
   @Override
   public void onError(String errorMessageText) {
-    showErrorMessage(errorMessageText);
+    searchView.setErrorMessage(errorMessageText);
   }
-
 
   @Override
   public void saveLastQueryInPreferences(String title){

@@ -11,23 +11,18 @@ public interface SearchAndResultContract {
   interface View{
     Context getContext();
     void setToolbar();
-    RecyclerView getRecyclerView();
-    TextView getErrorMessageTextView();
-    SwipeRefreshLayout getSwipeRefreshLayout();
-    void goToDetails(String url);
-    void goToFragment(String url);
-    ResultDetailsFragment getFragmentWithArgs(String url);
+    void setRecyclerView(List<Item> itemList);
+    void setErrorMessage(String errorMessageText);
+    void setLinearLayoutForRecyclerView(List<Item> itemList);
+    void setSwipeRefreshLayoutEnabledStatus();
+    void setSwipeRefreshLayout();
   }
 
   interface Presenter{
     void setFirstScreen();
+    void getItemsFromServer();
     void getItemsFromServer(String title);
     String getLastQueryFromPreferences();
-    void setRecyclerView(List<Item> itemList);
-    void showErrorMessage(String errorMessageText);
-    void setLinearLayoutForRecyclerView(List<Item> itemList);
-    void setSwipeRefreshLayoutEnabledStatus();
-    void setSwipeRefreshLayout();
     void saveLastQueryInPreferences(String title);
   }
 }

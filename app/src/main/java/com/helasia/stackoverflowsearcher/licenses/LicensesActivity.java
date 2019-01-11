@@ -12,23 +12,19 @@ import android.view.MenuItem;
 import com.helasia.stackoverflowsearcher.R;
 import com.helasia.stackoverflowsearcher.data.model.License;
 import com.helasia.stackoverflowsearcher.searchWithResults.SearchAndResultActivity;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LicensesActivity extends AppCompatActivity implements LicensesContract.View {
   @BindView(R.id.toolbar_licenses) Toolbar toolbar;
   @BindView(R.id.licencesDisplayRecyclerView) RecyclerView recyclerView;
-  private Context context;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_licenses_view);
     ButterKnife.bind(this);
-    context = getApplicationContext();
 
     LicensesContract.Presenter presenter = new LicensesPresenter(this);
     presenter.setFirstScreen();
@@ -36,14 +32,12 @@ public class LicensesActivity extends AppCompatActivity implements LicensesContr
 
   @Override
   public Context getContext() {
-    return context;
+    return this;
   }
 
   @Override
   public void onBackPressed() {
-    Intent intent = new Intent(this, SearchAndResultActivity.class);
-    startActivity(intent);
-    LicensesActivity.this.finish();
+    goToSearchAndResultActivity();
   }
 
   @Override
@@ -72,9 +66,13 @@ public class LicensesActivity extends AppCompatActivity implements LicensesContr
   }
 
   public boolean onOptionsItemSelected(MenuItem item){
+    goToSearchAndResultActivity();
+    return true;
+  }
+
+  private void goToSearchAndResultActivity(){
     Intent intent = new Intent(this, SearchAndResultActivity.class);
     startActivity(intent);
     LicensesActivity.this.finish();
-    return true;
   }
 }

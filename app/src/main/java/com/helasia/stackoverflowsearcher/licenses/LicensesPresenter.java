@@ -7,8 +7,9 @@ import java.util.List;
 
 public class LicensesPresenter implements LicensesContract.Presenter {
   private LicensesContract.View licensesView;
+  private List<License> licensesList = new ArrayList<>();
 
-  public LicensesPresenter(LicensesContract.View licensesView){
+  LicensesPresenter(LicensesContract.View licensesView){
     this.licensesView = licensesView;
   }
 
@@ -19,7 +20,6 @@ public class LicensesPresenter implements LicensesContract.Presenter {
   }
 
   private List<License> getLicensesList(){
-    List<License> licensesList = new ArrayList<>();
     License licenseOne = new License(1,
         licensesView.getContext().getResources().getString(R.string.license_one_name),
         licensesView.getContext().getResources().getString(R.string.license_one_author),

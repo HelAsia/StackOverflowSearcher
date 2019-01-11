@@ -29,9 +29,7 @@ public class LicenseWebViewActivity extends AppCompatActivity {
 
   @Override
   public void onBackPressed() {
-    Intent intent = new Intent(this, LicensesActivity.class);
-    startActivity(intent);
-    LicenseWebViewActivity.this.finish();
+    goToLicensesActivity();
   }
 
   private void setWebView(){
@@ -52,9 +50,13 @@ public class LicenseWebViewActivity extends AppCompatActivity {
   }
 
   public boolean onOptionsItemSelected(MenuItem item){
+    goToLicensesActivity();
+    return true;
+  }
+
+  private void goToLicensesActivity(){
     Intent intent = new Intent(this, LicensesActivity.class);
     startActivity(intent);
     LicenseWebViewActivity.this.finish();
-    return true;
   }
 }

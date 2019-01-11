@@ -14,7 +14,7 @@ import com.helasia.stackoverflowsearcher.searchWithResults.SearchAndResultActivi
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity implements WebViewContract.View {
   @BindView(R.id.web_view) WebView webView;
   @BindView(R.id.toolbar_web_view_activity_layout) Toolbar toolbar;
 
@@ -24,17 +24,11 @@ public class WebViewActivity extends AppCompatActivity {
     setContentView(R.layout.web_view_activity);
     ButterKnife.bind(this);
 
-    setToolbar();
-    setWebView(getUrl());
+    WebViewContract.Presenter presenter = new WebViewPresenter(this);
+    presenter.setFirstScreen();
   }
 
   @Override
-  public void onBackPressed() {
-    Intent intent = new Intent(this, SearchAndResultActivity.class);
-    startActivity(intent);
-    WebViewActivity.this.finish();
-  }
-
   public String getUrl(){
     Intent i = getIntent();
     if(i != null){
@@ -44,12 +38,14 @@ public class WebViewActivity extends AppCompatActivity {
     }
   }
 
-  private void setWebView(String url){
+  @Override
+  public void setWebView(String url){
     webView.setWebViewClient(new WebViewClient());
     webView.loadUrl(url);
   }
 
-  private void setToolbar() {
+  @Override
+  public void setToolbar() {
     toolbar.setTitle(R.string.title_with_font);
     setSupportActionBar(toolbar);
     ActionBar actionbar = getSupportActionBar();
@@ -60,9 +56,18 @@ public class WebViewActivity extends AppCompatActivity {
   }
 
   public boolean onOptionsItemSelected(MenuItem item){
+    goToSearchAndResultActivity();
+    return true;
+  }
+
+  @Override
+  public void onBackPressed() {
+    goToSearchAndResultActivity();
+  }
+
+  private void goToSearchAndResultActivity(){
     Intent intent = new Intent(this, SearchAndResultActivity.class);
     startActivity(intent);
     WebViewActivity.this.finish();
-    return true;
   }
 }

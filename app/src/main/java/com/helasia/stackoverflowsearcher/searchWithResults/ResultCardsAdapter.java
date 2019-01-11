@@ -24,7 +24,7 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
   private List<Item> itemList;
   private OnShareWebViewDetailsListener callbackWebView;
 
-  public void setCallbackWebViewOnShareClickedListener(OnShareWebViewDetailsListener callbackWebView){
+  void setCallbackWebViewOnShareClickedListener(OnShareWebViewDetailsListener callbackWebView){
     this.callbackWebView = callbackWebView;
   }
 
@@ -32,7 +32,7 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
     void shareCardClicked(String url);
   }
 
-  public ResultCardsAdapter(List<Item> itemList){
+  ResultCardsAdapter(List<Item> itemList){
     this.itemList = itemList;
     setHasStableIds(true);
   }
@@ -61,7 +61,7 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
   }
 
   @RequiresApi(api = VERSION_CODES.LOLLIPOP)
-  public void animateCircularReveal(View view) {
+  private void animateCircularReveal(View view) {
     int centerX = 0;
     int centerY = 0;
     int startRadius = 0;
@@ -79,14 +79,14 @@ public class ResultCardsAdapter extends RecyclerView.Adapter<ResultCardsAdapter.
     animateCircularReveal(viewHolder.itemView);
   }
 
-  public class ViewHolder extends RecyclerView.ViewHolder{
+  class ViewHolder extends RecyclerView.ViewHolder{
     @BindView(R.id.one_result_card_layout) CardView cardViewLayout;
     @BindView(R.id.title) TextView titleView;
     @BindView(R.id.user_name) TextView userNameView;
     @BindView(R.id.avatar) ImageView avatarView;
     @BindView(R.id.answer_count) TextView answerCountView;
 
-    public ViewHolder(View v) {
+    ViewHolder(View v) {
       super(v);
       ButterKnife.bind(this, v);
     }

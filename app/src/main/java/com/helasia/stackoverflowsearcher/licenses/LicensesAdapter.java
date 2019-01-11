@@ -28,7 +28,6 @@ public class LicensesAdapter extends RecyclerView.Adapter<LicensesAdapter.ViewHo
     setHasStableIds(true);
   }
 
-
   @Override
   public LicensesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
     LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -42,7 +41,8 @@ public class LicensesAdapter extends RecyclerView.Adapter<LicensesAdapter.ViewHo
       viewHolder.bind(licensesList.get(position));
 
       viewHolder.licenseCardViewLayout.setOnClickListener(view ->
-              ((LicensesActivity)context).goToLicenseSource(licensesList.get(position).getLicenseUrl()));
+              ((LicensesActivity)context)
+                      .goToLicenseSource(licensesList.get(position).getLicenseUrl()));
     }
   }
 
@@ -52,7 +52,7 @@ public class LicensesAdapter extends RecyclerView.Adapter<LicensesAdapter.ViewHo
   }
 
   @RequiresApi(api = VERSION_CODES.LOLLIPOP)
-  public void animateCircularReveal(View view) {
+  private void animateCircularReveal(View view) {
     int centerX = 0;
     int centerY = 0;
     int startRadius = 0;
@@ -75,7 +75,7 @@ public class LicensesAdapter extends RecyclerView.Adapter<LicensesAdapter.ViewHo
     return licensesList.get(position).getLicenseId();
   }
 
-  public class ViewHolder extends RecyclerView.ViewHolder {
+  class ViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.licenseName)
     TextView licenseNameTextView;
     @BindView(R.id.licenseAuthor) TextView licenseAuthorTextView;
@@ -83,7 +83,7 @@ public class LicensesAdapter extends RecyclerView.Adapter<LicensesAdapter.ViewHo
     @BindView(R.id.my_license_card_view_layout)
     CardView licenseCardViewLayout;
 
-    public ViewHolder(View v) {
+    ViewHolder(View v) {
       super(v);
       ButterKnife.bind(this, v);
     }
